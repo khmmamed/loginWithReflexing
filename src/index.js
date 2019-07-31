@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Login from "./login/form";
+import Login from "./login/Login";
 
 import "./styles.css";
 
