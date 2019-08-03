@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+
 //Store component
 import Store from "./login/store";
 import { Provider } from "react-redux";

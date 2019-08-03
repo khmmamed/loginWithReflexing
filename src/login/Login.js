@@ -8,9 +8,10 @@ import PasswordRecovery from "./components/Button";
 import UserNameInput from "./components/Input";
 import KeyWordInput from "./components/Input";
 
+
 //import redux module
 import { connect } from "react-redux";
-
+ 
 const LoginContainer = styled(Box)`
   width: 390px;
   background: #fff;
@@ -49,7 +50,9 @@ const SubmitButtonConatiner = styled(Box)`
   width: 100%;
 `;
 
+
 const Login = ({ userName, passWord, dispatch }) => (
+
   <Flex>
     <LoginContainer>
       <LoginForm>
@@ -67,6 +70,7 @@ const Login = ({ userName, passWord, dispatch }) => (
               placeholder="nom d'utilisateur"
               name="username"
               type="text"
+
               value={userName}
               onChange={e =>
                 dispatch({ type: "TYPING_USERNAME", value: e.target.value })
@@ -79,6 +83,7 @@ const Login = ({ userName, passWord, dispatch }) => (
               placeholder="mot de passe"
               name="password"
               type="password"
+
               value={passWord}
               onChange={e =>
                 dispatch({ type: "TYPING_PASSWORD", value: e.target.value })
@@ -86,7 +91,6 @@ const Login = ({ userName, passWord, dispatch }) => (
               material
             />
           </InputContainer>
-
           <SubmitButtonConatiner>
             <LoginButton
               text={"Entrer"}
@@ -116,3 +120,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Login);
+
