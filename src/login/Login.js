@@ -5,6 +5,11 @@ import { ReactComponent as Avatar } from "./ico/logo.svg";
 import LoginButton from "./components/Button";
 import SignUpButton from "./components/Button";
 import PasswordRecovery from "./components/Button";
+import UserNameInput from "./components/Input";
+import KeyWordInput from "./components/Input";
+
+//import redux module
+import { connect } from "react-redux";
 
 const LoginContainer = styled(Box)`
   width: 390px;
@@ -12,7 +17,6 @@ const LoginContainer = styled(Box)`
   padding-bottom: 20px;
   padding-top: 50px;
 `;
-
 const LoginForm = styled.form`
   width: 100%;
 `;
@@ -25,7 +29,6 @@ const Title = styled.span`
   text-align: center;
   padding-bottom: 70px;
 `;
-
 const LoginAvatar = styled.span`
   display: block;
   width: 180px;
@@ -42,58 +45,11 @@ const InputContainer = styled(Box)`
   margin-bottom: 35px;
   margin-top: ${props => props.top};
 `;
-const UserInput = styled.input`
-  font-family: Poppins-SemiBold;
-  font-size: 18px;
-  color: #555555;
-  line-height: 1.2;
-  display: block;
-  width: 100%;
-  height: 52px;
-  background: transparent;
-  padding: 0 5px;
-  outline: none;
-  border: none;
-`;
-
-const UserInputText = styled.span`
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-`;
-
 const SubmitButtonConatiner = styled(Box)`
   width: 100%;
 `;
 
-const SubmitButton = styled.button`
-  font-family: Poppins-Medium;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.2;
-  text-transform: uppercase;
-  padding: 0 20px;
-  width: 100%;
-  height: 50px;
-  background-color: #57b846;
-  border: 1px solid #57b846;
-  border-radius: 25px;
-  box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -moz-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -webkit-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -o-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -ms-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-`;
-
-const Login = ({ userName, password }) => (
+const Login = ({ userName, passWord, dispatch }) => (
   <Flex>
     <LoginContainer>
       <LoginForm>
@@ -107,19 +63,30 @@ const Login = ({ userName, password }) => (
             </LoginAvatar>
           </Box>
           <InputContainer top={"50px"}>
-            <UserInput
+            <UserNameInput
               placeholder="nom d'utilisateur"
               name="username"
               type="text"
+              value={userName}
+              onChange={e =>
+                dispatch({ type: "TYPING_USERNAME", value: e.target.value })
+              }
+              material
             />
           </InputContainer>
           <InputContainer top={"0px"}>
-            <UserInput
+            <KeyWordInput
               placeholder="mot de passe"
               name="password"
               type="password"
+              value={passWord}
+              onChange={e =>
+                dispatch({ type: "TYPING_PASSWORD", value: e.target.value })
+              }
+              material
             />
           </InputContainer>
+
           <SubmitButtonConatiner>
             <LoginButton
               text={"Entrer"}
@@ -143,4 +110,9 @@ const Login = ({ userName, password }) => (
   </Flex>
 );
 
-export default Login;
+const mapStateToProps = state => ({
+  userName: state.login.username,
+  passWord: state.login.password
+});
+
+export default connect(mapStateToProps)(Login);
