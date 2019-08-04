@@ -20,5 +20,9 @@ export const login = (
     return { ...state };
   }
 
+  if (action.type === "SHOW_USERNAME") {
+    state.login.username = action.username;
+    return { ...state };
+  }
   return state;
 };
