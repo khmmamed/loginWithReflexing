@@ -1,13 +1,11 @@
-import React from "react";
-
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 const SubmiteHovered = keyframes`
   from {margin-bottom: 5px;}
   to {margin-bottom: 50px;}
 }
 `;
-const Button = styled.button`
+const Rounded = css`
   font-family: Poppins-Medium;
   font-size: 16px;
   color: #fff;
@@ -24,15 +22,6 @@ const Button = styled.button`
   &:hover {
   }
 `;
-
-export default ({ name, value, text, bgColor, borderColor, ...props }) => (
-  <Button
-    bgColor={bgColor}
-    borderColor={borderColor}
-    name={name}
-    value={value}
-    {...props}
-  >
-    {text}
-  </Button>
-);
+export default styled.button`
+  ${props => (props.rounded ? Rounded : null)}
+`;
