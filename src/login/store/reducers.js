@@ -1,3 +1,21 @@
+//import redux module
+import { combineReducers } from "redux";
+//declare our initial object
+const initialState = {
+  login: {
+    username: "",
+    password: ""
+  },
+  signup: {
+    email: "",
+    password: "",
+    confirmPassword: ""
+  },
+  forgotPassword: {
+    email: ""
+  }
+};
+
 /**
  * login reducer set username and
  * password from user entry
@@ -6,10 +24,7 @@
  * @param {*} action
  * @returns {*} state
  */
-export const login = (
-  state = { login: { username: "", password: "" } },
-  action
-) => {
+const login = (state = { ...initialState.login }, action) => {
   if (action.type === "TYPING_USERNAME") {
     state.login.username = action.value;
     return { ...state };
@@ -26,3 +41,41 @@ export const login = (
   }
   return state;
 };
+
+/**
+ * signup to set new user data
+ * @param {*} state
+ * @param {*} action
+ */
+const signup = (state = { ...initialState.signup }, action) => {
+  switch (action.type) {
+    case "TYPING_EMAIL":
+      return { ...state };
+    case "TYPING_PASSWORD":
+      return { ...state };
+    case "TYPING_PASSWORD_CONFIRMATION":
+      return { ...state };
+    default:
+      return state;
+  }
+};
+
+/**
+ * forgot password
+ * @param {*} state
+ * @param {*} action
+ */
+const forgotPassword = (state = { ...initialState.forgotPassword }, action) => {
+  switch (action.type) {
+    case "TYPING_EMAIL":
+      return { ...state };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  login,
+  signup,
+  forgotPassword
+});
