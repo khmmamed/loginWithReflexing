@@ -5,14 +5,14 @@ import ReactDOM from "react-dom";
 import Store from "./login/store";
 import { Provider } from "react-redux";
 
-import Login from "./login/Login";
+import Index from "./login";
 
 import "./styles.css";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <Index />
     </div>
   );
 }
